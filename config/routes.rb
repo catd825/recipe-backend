@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'api/v1/users/:id/recipes', to: 'api/v1/users#get_user_recipes'
+
   resources :favorite_recipes
   resources :comments
   resources :categories
-  resources :recipes, only: [:index]
+  resources :recipes
   namespace :api do
     namespace :v1 do
       resources :users, only: [:create]
-      resources :recipes, except: [:index]
       post '/login', to: 'auth#create'
       get '/profile', to: 'users#profile'
     end

@@ -26,6 +26,10 @@ module Api
         end
       end
 
+      def get_user_recipes
+        recipes = @user.recipes
+      end
+
       private
 
       def user_params
