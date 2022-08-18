@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UpdateRecipeModel < ActiveRecord::Migration[6.0]
   def change
     remove_column :recipes, :user_id, :integer

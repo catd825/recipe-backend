@@ -10,61 +10,60 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_16_211945) do
-
+ActiveRecord::Schema.define(version: 20_220_816_211_945) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "categories", force: :cascade do |t|
-    t.bigint "recipe_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["recipe_id"], name: "index_categories_on_recipe_id"
+  create_table 'categories', force: :cascade do |t|
+    t.bigint 'recipe_id', null: false
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['recipe_id'], name: 'index_categories_on_recipe_id'
   end
 
-  create_table "comments", force: :cascade do |t|
-    t.bigint "recipe_id", null: false
-    t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["recipe_id"], name: "index_comments_on_recipe_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
+  create_table 'comments', force: :cascade do |t|
+    t.bigint 'recipe_id', null: false
+    t.bigint 'user_id', null: false
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['recipe_id'], name: 'index_comments_on_recipe_id'
+    t.index ['user_id'], name: 'index_comments_on_user_id'
   end
 
-  create_table "favorite_recipes", force: :cascade do |t|
-    t.bigint "recipe_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "recipe_liker_id"
-    t.index ["recipe_id"], name: "index_favorite_recipes_on_recipe_id"
-    t.index ["recipe_liker_id"], name: "index_favorite_recipes_on_recipe_liker_id"
+  create_table 'favorite_recipes', force: :cascade do |t|
+    t.bigint 'recipe_id', null: false
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.bigint 'recipe_liker_id'
+    t.index ['recipe_id'], name: 'index_favorite_recipes_on_recipe_id'
+    t.index ['recipe_liker_id'], name: 'index_favorite_recipes_on_recipe_liker_id'
   end
 
-  create_table "recipes", force: :cascade do |t|
-    t.string "title"
-    t.string "description"
-    t.text "instructions"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "ingredients"
-    t.bigint "recipe_creator_id"
-    t.index ["recipe_creator_id"], name: "index_recipes_on_recipe_creator_id"
+  create_table 'recipes', force: :cascade do |t|
+    t.string 'title'
+    t.string 'description'
+    t.text 'instructions'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.string 'ingredients'
+    t.bigint 'recipe_creator_id'
+    t.index ['recipe_creator_id'], name: 'index_recipes_on_recipe_creator_id'
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "username"
-    t.string "password_digest"
-    t.string "bio"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "name"
-    t.string "location"
+  create_table 'users', force: :cascade do |t|
+    t.string 'username'
+    t.string 'password_digest'
+    t.string 'bio'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.string 'name'
+    t.string 'location'
   end
 
-  add_foreign_key "categories", "recipes"
-  add_foreign_key "comments", "recipes"
-  add_foreign_key "comments", "users"
-  add_foreign_key "favorite_recipes", "recipes"
-  add_foreign_key "favorite_recipes", "users", column: "recipe_liker_id"
-  add_foreign_key "recipes", "users", column: "recipe_creator_id"
+  add_foreign_key 'categories', 'recipes'
+  add_foreign_key 'comments', 'recipes'
+  add_foreign_key 'comments', 'users'
+  add_foreign_key 'favorite_recipes', 'recipes'
+  add_foreign_key 'favorite_recipes', 'users', column: 'recipe_liker_id'
+  add_foreign_key 'recipes', 'users', column: 'recipe_creator_id'
 end
