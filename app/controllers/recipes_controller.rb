@@ -5,4 +5,15 @@ class RecipesController < ApplicationController
     render json: Recipe.all.to_json
   end
 
+  def show
+    find_recipe
+    render json: @recipe.to_json
+  end
+
+  private
+  
+  def find_recipe
+    @recipe = Recipe.find(params[:id])
+  end
+
 end
