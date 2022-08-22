@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RecipesController < ApplicationController
   skip_before_action :authorized, only: [:index]
 
@@ -11,9 +13,8 @@ class RecipesController < ApplicationController
   end
 
   private
-  
+
   def find_recipe
     @recipe = Recipe.find(params[:id])
   end
-
 end
