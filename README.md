@@ -1,25 +1,11 @@
-# README
+Ensure you have rails installed 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Run commands:
+`bundle install`
+`rails db:create`
+`rails db:migrate`
+`rails db:seed`
 
-Things you may want to cover:
+To run: `rails s`
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-=======
+Navigate back to frontend component https://github.com/catd825/recipe-frontend/ and follow those instructions
