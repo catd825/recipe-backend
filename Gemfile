@@ -50,3 +50,9 @@ gem 'active_model_serializers', '~> 0.10.13'
 gem 'faker', '~> 2.22'
 
 gem 'rubocop-rails', require: false
+
+gem 'dotenv-rails'
+
+gem 'faraday'
+
+gem 'faraday-net_http'

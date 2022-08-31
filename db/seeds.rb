@@ -1,35 +1,35 @@
-# frozen_string_literal: true
+require 'faraday'
 
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
-Recipe.destroy_all
 User.destroy_all
+Recipe.destroy_all
 FavoriteRecipe.destroy_all
 
+@resp = Faraday.get 'https://api.spoonacular.com/recipes/random?number=6' do |req|
+  req.headers['X-API-Key'] = ENV['SPOON_API_KEY']
+end
+recipeJSON = JSON.parse(@resp.body)
+
 user1 = User.create!(name: 'Cathy', username: 'catd825', password_digest: BCrypt::Password.create('password'),
-                     bio: 'i love to cook!!')
+                     bio: 'i love to cook!!', location: 'new york')
 user2 = User.create!(name: 'David', username: 'ddubbs87', password_digest: BCrypt::Password.create('password'),
-                     bio: 'i dont love to cook!!')
+                     bio: 'i dont love to cook!!', location: 'brooklyn')
 user3 = User.create!(name: 'Mom', username: 'Nonna1956', password_digest: BCrypt::Password.create('password'),
-                     bio: 'i <3 italian food')
+                     bio: 'i <3 italian food', location: 'long island')
 
-recipe1 = Recipe.create!(title: 'pasta', description: 'basic pasta recipe', ingredients: '1 lb of pasta',
-                         instructions: 'boi l water, add pasta, cook for 8 min, then drain, add toppings, and serve', recipe_creator_id: user3.id, creator_name: user3.name)
-recipe2 = Recipe.create!(title: 'pizza', description: 'pizza pizza', ingredients: 'dough, pizza sauce, cheese',
-                         instructions: 'bake!', recipe_creator_id: user3.id, creator_name: user3.name)
-recipe3 = Recipe.create!(title: 'sauce', description: 'best marinara!',
-                         ingredients: 'canned tomato, olive oil, oregano', instructions: 'simmer for hours!', recipe_creator_id: user3.id, creator_name: user3.name)
-recipe4 = Recipe.create!(title: 'pasta al limone', description: '"easy and delicious!"',
-                         ingredients: 'pasta lemon cheese', instructions: 'boil pasta add lemon and cheese', recipe_creator_id: user2.id, creator_name: user2.name)
-recipe5 = Recipe.create!(title: 'baked ziti', description: 'amazing baked ziti!', ingredients: 'pasta sauce cheese',
-                         instructions: 'bake', recipe_creator_id: user2.id, creator_name: user2.name)
+users = [user1, user2, user3]
 
-FavoriteRecipe.create!(recipe_liker_id: user2.id, recipe_id: recipe2.id)
-FavoriteRecipe.create!(recipe_liker_id: user1.id, recipe_id: recipe2.id)
-FavoriteRecipe.create!(recipe_liker_id: user1.id, recipe_id: recipe3.id)
+recipeJSON['recipes'].each do |recipe|
+  user = users.sample
+  Recipe.create!(
+    title: recipe['title'],
+    instructions: recipe['instructions'],
+    ingredients: recipe['extendedIngredients'][0]['aisle'],
+    description: recipe['summary'],
+    recipe_creator_id: user.id,
+    creator_name: user.name
+  )
+end
+
+for i in 1..10 do
+  FavoriteRecipe.create!(recipe_liker_id: users.sample.id, recipe_id: Recipe.all.sample.id)
+end
