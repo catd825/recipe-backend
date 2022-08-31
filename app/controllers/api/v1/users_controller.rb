@@ -27,7 +27,7 @@ module Api
       end
 
       def get_user_recipes
-        recipes = @user.recipes
+        render json: @user.recipes.to_json
       end
 
       private
