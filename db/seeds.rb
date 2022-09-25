@@ -26,7 +26,8 @@ recipeJSON['recipes'].each do |recipe|
     ingredients: recipe['extendedIngredients'][0]['aisle'],
     description: recipe['summary'],
     recipe_creator_id: user.id,
-    creator_name: user.name
+    creator_name: user.name,
+    img_url: "https://spoonacular.com/recipeImages/#{recipe['id']}-556x370.jpg}"
   )
 end
 
