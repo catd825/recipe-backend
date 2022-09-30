@@ -9,8 +9,8 @@ class FavoriteRecipesController < ApplicationController
     end
 
     def destroy
-        @transaction.destroy
-        render json: @transaction.to_json
+        @favorite_recipe.destroy
+        render json: @favorite_recipe.to_json
     end
 
     private
