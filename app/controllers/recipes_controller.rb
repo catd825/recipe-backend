@@ -4,7 +4,9 @@ class RecipesController < ApplicationController
   skip_before_action :authorized, only: [:index]
 
   def index
-    render json: Recipe.all.to_json
+    # try offset later after pagination
+    @users = Recipe.limit(4).order("title ASC")
+    render json: @users.to_json
   end
 
   def show
@@ -17,4 +19,5 @@ class RecipesController < ApplicationController
   def find_recipe
     @recipe = Recipe.find(params[:id])
   end
+  
 end
