@@ -27,11 +27,11 @@ module Api
       end
 
       def get_user_recipes
-        render json: @user.recipes.to_json
+        render json: @user.recipes
       end
 
       def get_user_favorites
-        render json: @user.user_favorite_recipes.to_json
+        render json: @user.user_favorite_recipes
       end
 
       private
