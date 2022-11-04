@@ -5,8 +5,8 @@ class RecipesController < ApplicationController
 
   def index
     # try offset later after pagination
-    @users = Recipe.limit(4).order("title ASC")
-    render json: @users.to_json
+    @recipes = Recipe.limit(4).order("title ASC")
+    render json: @recipes
   end
 
   def show
