@@ -5,12 +5,13 @@ class FavoriteRecipesController < ApplicationController
 
     def create
         favorite_recipes = FavoriteRecipe.create(favorite_recipe_params)
-        render json: favorite_recipes.to_json
+        render json: favorite_recipes
     end
 
     def destroy
+        # byebug
         @favorite_recipe.destroy
-        render json: @favorite_recipe.to_json
+        render json: { confirmation: 'deleted!' } 
     end
 
     private

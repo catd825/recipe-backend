@@ -4,7 +4,7 @@ User.destroy_all
 Recipe.destroy_all
 FavoriteRecipe.destroy_all
 
-@resp = Faraday.get 'https://api.spoonacular.com/recipes/random?number=6' do |req|
+@resp = Faraday.get 'https://api.spoonacular.com/recipes/random?number=12' do |req|
   req.headers['X-API-Key'] = ENV['SPOON_API_KEY']
 end
 recipeJSON = JSON.parse(@resp.body)
