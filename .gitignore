@@ -33,3 +33,5 @@
 
 # ignore to hide api keys
 .env
+
+.DS_Store
